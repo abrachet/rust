@@ -1078,7 +1078,7 @@ impl Metadata {
     /// Returns the last status change listed in this metadata.
     /// 
     /// The returned value corresponds to the 'ctime' field of 'stat' on
-    /// both Unix and Windows platforms, provided the disk is NTFS not FAT file systems
+    /// Unix platforms. It is currently not supported on Windows platforms.
     /// 
     /// # Errors
     ///

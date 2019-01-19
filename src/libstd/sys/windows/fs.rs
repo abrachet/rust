@@ -470,6 +470,8 @@ impl FileAttr {
         Ok(SystemTime::from(self.creation_time))
     }
 
+    // There must be a way to access this. Windows has it in their struct _stat.
+    // I just don't know how yet
     pub fn status_changed(&self) -> io::Result<SystemTime> {
         Err(io::Error::new(io::ErrorKind::Other,
                            "status changed is not available on this platform \
@@ -487,7 +489,6 @@ impl FileAttr {
     pub fn created_u64(&self) -> u64 {
         to_u64(&self.creation_time)
     }
-
 
     fn is_reparse_point(&self) -> bool {
         self.attributes & c::FILE_ATTRIBUTE_REPARSE_POINT != 0
