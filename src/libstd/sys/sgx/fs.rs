@@ -48,6 +48,10 @@ impl FileAttr {
     pub fn created(&self) -> io::Result<SystemTime> {
         match self.0 {}
     }
+
+    pub fn status_changed(&self) -> io::Result<SystemTime> {
+        match self.0 {}
+    }
 }
 
 impl Clone for FileAttr {

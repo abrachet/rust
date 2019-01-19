@@ -1074,6 +1074,36 @@ impl Metadata {
     pub fn created(&self) -> io::Result<SystemTime> {
         self.0.created().map(FromInner::from_inner)
     }
+
+    /// Returns the last status change listed in this metadata.
+    /// 
+    /// The returned value corresponds to the 'ctime' field of 'stat' on
+    /// both Unix and Windows platforms, provided the disk is NTFS not FAT file systems
+    /// 
+    /// # Errors
+    ///
+    /// This field may not be available on all platforms, and will return an
+    /// `Err` on platforms where it is not available.
+    ///
+    /// # Examples
+    ///
+    /// ```no_run
+    /// use std::fs;
+    ///
+    /// fn main() -> std::io::Result<()> {
+    ///     let metadata = fs::metadata("foo.txt")?;
+    ///
+    ///     if let Ok(ctime) = metadata.status_changed() {
+    ///         println!("{:?}", ctime);
+    ///     } else {
+    ///         println!("Not supported on this platform");
+    ///     }
+    ///     Ok(())
+    /// }
+    /// ```
+    pub fn status_changed(&self) -> io::Result<SystemTime> {
+        self.0.status_changed().map(FromInner::from_inner)
+    }
 }
 
 #[stable(feature = "std_debug", since = "1.16.0")]

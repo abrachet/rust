@@ -470,6 +470,12 @@ impl FileAttr {
         Ok(SystemTime::from(self.creation_time))
     }
 
+    pub fn status_changed(&self) -> io::Result<SystemTime> {
+        Err(io::Error::new(io::ErrorKind::Other,
+                           "status changed is not available on this platform \
+                            currently"))
+    }
+
     pub fn modified_u64(&self) -> u64 {
         to_u64(&self.last_write_time)
     }
@@ -481,6 +487,7 @@ impl FileAttr {
     pub fn created_u64(&self) -> u64 {
         to_u64(&self.creation_time)
     }
+
 
     fn is_reparse_point(&self) -> bool {
         self.attributes & c::FILE_ATTRIBUTE_REPARSE_POINT != 0
