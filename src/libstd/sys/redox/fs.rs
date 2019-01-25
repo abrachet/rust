@@ -89,7 +89,7 @@ impl FileAttr {
         }))
     }
 
-    pub fn status_change(&self) -> io::Result<SystemTime> {
+    pub fn status_changed(&self) -> io::Result<SystemTime> {
         Ok(SystemTime::from(libc::timespec {
             tv_sec: self.stat.st_ctime as libc::time_t,
             tv_nsec: self.stat.st_ctime_nsec as libc::c_long,

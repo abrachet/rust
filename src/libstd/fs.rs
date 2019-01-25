@@ -1101,6 +1101,7 @@ impl Metadata {
     ///     Ok(())
     /// }
     /// ```
+    #[stable(feature = "fs_time", since = "1.10.0")]
     pub fn status_changed(&self) -> io::Result<SystemTime> {
         self.0.status_changed().map(FromInner::from_inner)
     }
